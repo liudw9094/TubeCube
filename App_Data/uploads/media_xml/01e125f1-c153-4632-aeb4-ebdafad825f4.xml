@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<fileset>
+ERROR: File has to contain at least 2 video tags to calculate frame sequence
+ERROR: flv/stream.rb:252:in `frame_sequence'
+ERROR: flv/stream.rb:270:in `framerate'
+ERROR: flv/stream.rb:131:in `add_meta_tag'
+ERROR: flvtool2/base.rb:184:in `add_meta_data_tag'
+ERROR: flvtool2/base.rb:137:in `update'
+ERROR: flvtool2/base.rb:47:in `send'
+ERROR: flvtool2/base.rb:47:in `execute!'
+ERROR: flvtool2/base.rb:46:in `each'
+ERROR: flvtool2/base.rb:46:in `execute!'
+ERROR: flvtool2/base.rb:239:in `process_files'
+ERROR: flvtool2/base.rb:225:in `each'
+ERROR: flvtool2/base.rb:225:in `process_files'
+ERROR: flvtool2/base.rb:44:in `execute!'
+ERROR: flvtool2.rb:168:in `execute!'
+ERROR: flvtool2.rb:228
+</fileset>
+

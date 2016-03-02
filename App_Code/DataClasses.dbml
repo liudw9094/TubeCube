@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbs" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.\SQLEXPRESS;AttachDbFilename=|DataDirectory|\dbs.mdf;Integrated Security=True;User Instance=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbsConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.media" Member="media">
+    <Type Name="media" Id="ID1">
+      <Column Name="id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="tittle" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="typeID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="lasttimeSeconds" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="comment" Type="System.String" DbType="NVarChar(2048)" CanBeNull="true" />
+      <Column Name="uploadedTime" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="ownerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="[authorization]" Member="authorization" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="protectingPwd" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
+      <Column Name="votedScore" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="votedTimes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="userFolderID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="Converting" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="OriginFileName" Type="System.String" DbType="NChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="thumbnail" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="watchedTimes" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="media_mediaComments" Member="mediaComments" ThisKey="id" OtherKey="mediaID" Type="mediaComments" />
+      <Association Name="media_mediaVoteRecords" Member="mediaVoteRecords" ThisKey="id" OtherKey="mediaID" Type="mediaVoteRecords" />
+      <Association Name="media_relatedMarkNMedia" Member="relatedMarkNMedia" ThisKey="id" OtherKey="mediaid" Type="relatedMarkNMedia" />
+      <Association Name="users_media" Member="users" ThisKey="ownerID" OtherKey="id" Type="users" IsForeignKey="true" />
+      <Association Name="mediaType_media" Member="mediaType" ThisKey="typeID" OtherKey="id" Type="mediaType" IsForeignKey="true" />
+      <Association Name="userMediaFolder_media" Member="userMediaFolder" ThisKey="userFolderID" OtherKey="id" Type="userMediaFolder" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.users" Member="users">
+    <Type Name="users">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="nickname" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.Char" DbType="NChar(1)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="statement" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="exp" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="profImage" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="users_media" Member="media" ThisKey="id" OtherKey="ownerID" Type="media" />
+      <Association Name="users_mediaComments" Member="mediaComments" ThisKey="id" OtherKey="userID" Type="mediaComments" />
+      <Association Name="users_mediaCommentVoteRecords" Member="mediaCommentVoteRecords" ThisKey="id" OtherKey="userID" Type="mediaCommentVoteRecords" />
+      <Association Name="users_mediaVoteRecords" Member="mediaVoteRecords" ThisKey="id" OtherKey="userID" Type="mediaVoteRecords" />
+      <Association Name="users_userMediaFolder" Member="userMediaFolder" ThisKey="id" OtherKey="ownerID" Type="userMediaFolder" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mediaComments" Member="mediaComments">
+    <Type Name="mediaComments">
+      <Column Name="id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="fatherID" Type="System.Guid" DbType="UniqueIdentifier" CanBeNull="true" />
+      <Column Name="mediaID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" CanBeNull="false" />
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="comment" Type="System.String" DbType="NVarChar(2048) NOT NULL" CanBeNull="false" />
+      <Column Name="good" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="bad" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="mediaComments_mediaComments" Member="mediaComments2" ThisKey="id" OtherKey="fatherID" Type="mediaComments" />
+      <Association Name="mediaComments_mediaCommentVoteRecords" Member="mediaCommentVoteRecords" ThisKey="id" OtherKey="mediaCommentID" Type="mediaCommentVoteRecords" />
+      <Association Name="media_mediaComments" Member="media" ThisKey="mediaID" OtherKey="id" Type="media" IsForeignKey="true" />
+      <Association Name="mediaComments_mediaComments" Member="mediaComments1" ThisKey="fatherID" OtherKey="id" Type="mediaComments" IsForeignKey="true" />
+      <Association Name="users_mediaComments" Member="users" ThisKey="userID" OtherKey="id" Type="users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mediaCommentVoteRecords" Member="mediaCommentVoteRecords">
+    <Type Name="mediaCommentVoteRecords">
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="mediaCommentID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="mediaComments_mediaCommentVoteRecords" Member="mediaComments" ThisKey="mediaCommentID" OtherKey="id" Type="mediaComments" IsForeignKey="true" />
+      <Association Name="users_mediaCommentVoteRecords" Member="users" ThisKey="userID" OtherKey="id" Type="users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mediaMarks" Member="mediaMarks">
+    <Type Name="mediaMarks">
+      <Column Name="id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="mark" Type="System.String" DbType="NChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="mediaMarks_relatedMarkNMedia" Member="relatedMarkNMedia" ThisKey="id" OtherKey="markid" Type="relatedMarkNMedia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mediaType" Member="mediaType">
+    <Type Name="mediaType">
+      <Column Name="id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="father_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="comment" Type="System.String" DbType="NVarChar(512)" CanBeNull="true" />
+      <Association Name="mediaType_media" Member="media" ThisKey="id" OtherKey="typeID" Type="media" />
+      <Association Name="mediaType_mediaType" Member="mediaType2" ThisKey="id" OtherKey="father_id" Type="mediaType" />
+      <Association Name="mediaType_mediaType" Member="mediaType1" ThisKey="father_id" OtherKey="id" Type="mediaType" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.mediaVoteRecords" Member="mediaVoteRecords">
+    <Type Name="mediaVoteRecords">
+      <Column Name="userID" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="mediaID" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="media_mediaVoteRecords" Member="media" ThisKey="mediaID" OtherKey="id" Type="media" IsForeignKey="true" />
+      <Association Name="users_mediaVoteRecords" Member="users" ThisKey="userID" OtherKey="id" Type="users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.relatedMarkNMedia" Member="relatedMarkNMedia">
+    <Type Name="relatedMarkNMedia">
+      <Column Name="markid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="mediaid" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="media_relatedMarkNMedia" Member="media" ThisKey="mediaid" OtherKey="id" Type="media" IsForeignKey="true" />
+      <Association Name="mediaMarks_relatedMarkNMedia" Member="mediaMarks" ThisKey="markid" OtherKey="id" Type="mediaMarks" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.userMediaFolder" Member="userMediaFolder">
+    <Type Name="userMediaFolder">
+      <Column Name="id" Type="System.Guid" DbType="UniqueIdentifier NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ownerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NChar(32) NOT NULL" CanBeNull="false" />
+      <Column Name="[authorization]" Member="authorization" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="protectedPwd" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
+      <Column Name="comment" Type="System.String" DbType="NVarChar(2048)" CanBeNull="true" />
+      <Association Name="userMediaFolder_media" Member="media" ThisKey="id" OtherKey="userFolderID" Type="media" />
+      <Association Name="users_userMediaFolder" Member="users" ThisKey="ownerID" OtherKey="id" Type="users" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Function Name="dbo.NewUser" Method="NewUser">
+    <Parameter Name="nickname" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="email" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="NChar(32)" />
+    <Parameter Name="gender" Type="System.Char" DbType="NChar(1)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="SmallDateTime" />
+    <Parameter Name="statement" Type="System.String" DbType="NVarChar(200)" />
+    <Parameter Name="exp" Type="System.Int32" DbType="Int" />
+    <ElementType Name="NewUserResult">
+      <Column Name="" Member="Column1" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.NewMedia" Method="NewMedia">
+    <Parameter Name="userid" Type="System.Int32" DbType="Int" />
+    <Parameter Name="originFileName" Type="System.String" DbType="NChar(256)" />
+    <ElementType IdRef="ID1" />
+  </Function>
+</Database>

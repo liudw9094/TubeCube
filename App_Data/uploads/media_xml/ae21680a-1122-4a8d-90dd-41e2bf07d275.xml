@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<fileset>
+  <flv name="D:/aas/WebSites/TubeCube/App_Data/uploads/media/ae21680a-1122-4a8d-90dd-41e2bf07d275.flv">
+    <hasKeyframes>true</hasKeyframes>
+    <cuePoints>
+    </cuePoints>
+    <audiodatarate>57.3109333333333</audiodatarate>
+    <hasVideo>true</hasVideo>
+    <stereo>true</stereo>
+    <canSeekToEnd>false</canSeekToEnd>
+    <framerate>16</framerate>
+    <audiosamplerate>22000</audiosamplerate>
+    <videocodecid>2</videocodecid>
+    <datasize>4207860</datasize>
+    <lasttimestamp>30</lasttimestamp>
+    <audiosamplesize>16</audiosamplesize>
+    <audiosize>227566</audiosize>
+    <hasAudio>true</hasAudio>
+    <audiodelay>0</audiodelay>
+    <videosize>3979496</videosize>
+    <metadatadate>Fri May 25 12:52:16 GMT+0800 2012</metadatadate>
+    <metadatacreator>inlet media FLVTool2 v1.0.6 - http://www.inlet-media.de/flvtool2</metadatacreator>
+    <lastkeyframetimestamp>22.75</lastkeyframetimestamp>
+    <height>360</height>
+    <filesize>4214405</filesize>
+    <hasMetadata>true</hasMetadata>
+    <keyframes>
+      <times>
+        <value>0</value>
+        <value>0.063</value>
+        <value>4.188</value>
+        <value>7.125</value>
+        <value>22.75</value>
+      </times>
+      <filepositions>
+        <value>823</value>
+        <value>7028</value>
+        <value>698641</value>
+        <value>1144743</value>
+        <value>3256025</value>
+      </filepositions>
+    </keyframes>
+    <audiocodecid>2</audiocodecid>
+    <videodatarate>1059.788</videodatarate>
+    <duration>30.062</duration>
+    <hasCuePoints>false</hasCuePoints>
+    <width>640</width>
+  </flv>
+</fileset>
+

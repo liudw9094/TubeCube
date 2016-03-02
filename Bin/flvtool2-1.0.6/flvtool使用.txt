@@ -1,0 +1,48 @@
+flvtool2的下载和使用
+
+flvtool2下载连接：http://rubyforge.org/frs/?group_id=1096&release_id=4615
+
+有些来路不明的FLV文件Meta Data是损坏的，播放起来很是不方便。以前记得Kyle提到过几个修复工具，今天试着找到Flvtool2,Flvmdi，效果确实可以，非常方便。感觉两者没有太大差别，只是后者还提供了一个Windows下的GUI而已。
+这里就把我的使用方法简单记录一下。
+
+Flvtool2
+
+http://blog.inlet-media.de/flvtool2/
+
+其命令格式如下：
+
+flvtool2.exe [-ACDPUVaciklnoprstvx]... [-key:value]... in-path|stdin [out-path|stdout]
+
+如果out-path未定义，则将覆盖原文件，如果指定in-path为目录，out-path应为同一目录，否则将被忽略。
+
+Commands:
+-A Adds tags from -t tags-file
+-C Cuts file using -i inpoint and -o outpoint
+-D Debugs file (writes a lot to stdout)
+-H Helpscreen will be shown
+-P Prints out meta data to stdout
+-U Updates FLV with an onMetaTag event
+
+Switches:
+-a Collapse space between cutted regions
+-c Compatibility mode calculates some onMetaTag values different
+-key:value Key-value-pair for onMetaData tag (overwrites generated values)
+-i timestamp Inpoint for cut command in miliseconds
+-k Keyframe mode slides onCuePoint(navigation) tags added by the
+add command to nearest keyframe position
+-l Logs FLV stream reading to stream.log in current directory
+-n Number of tag to debug
+-o timestamp Outpoint for cut command in miliseconds
+-p Preserve mode only updates FLVs that have not been processed
+before
+-r Recursion for directory processing
+-s Simulation mode never writes FLV data to out-path
+-t path Tagfile (MetaTags written in XML)
+-v Verbose mode
+-x XML mode instead of YAML mode
+
+举个简单的例子,新建文本文件，敲入下列内容，另存为.DAT批处理文件
+
+"C:\Program Files\flvtool2.exe" -UPx "C:\in.flv" "C:\out.flv"
+
+运行该批处理文件，将更新（修复）C:\in.flv文件的Meta Data，同时按照XML格式输出Meta Data信息内容到屏幕。

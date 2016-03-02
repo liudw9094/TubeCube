@@ -1,0 +1,15 @@
+﻿function SetUserMenu(divID, refURL, funcErrorResponded) {
+    var divObj = $("div#" + divID);
+    divObj.html("<p align=\"right\">信息载入中。。。</p>");
+    var postdata = {
+        "fd": divID,
+        "rf": refURL
+    };
+    divObj.load("user/User.aspx", postdata,
+        function (response, status, xhr) {
+            if (status != "success") {
+                divObj.html("An error occured: <br/>" + xhr.status + " " + xhr.statusText);
+                funcErrorResponded(response, status, xhr);
+            }
+        });
+}

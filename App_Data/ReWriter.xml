@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ReWriterUrls>
+  <rule>
+    <old>~/v([?a-zA-Z0-9]{8}-[?a-zA-Z0-9]{4}-[?a-zA-Z0-9]{4}-[?a-zA-Z0-9]{4}-[?a-zA-Z0-9]{12})</old>
+    <new>~/Cinema.aspx?mID=$1</new>
+  </rule>
+  <rule>
+    <old>~/user/vml([\s\S])</old>
+    <new>~/user/MediaLoader.ashx?mID=$1</new>
+  </rule>
+  <rule>
+    <old>~/user/vml</old>
+    <new>~/user/MediaLoader.ashx</new>
+  </rule>
+</ReWriterUrls>
